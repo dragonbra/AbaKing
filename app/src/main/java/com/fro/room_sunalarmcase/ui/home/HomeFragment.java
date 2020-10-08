@@ -57,24 +57,16 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-
+        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        View mhomeroot = inflater.inflate(R.layout.fragment_home,container,false);
         context = getActivity().getBaseContext();
 
 
         /**
-         * 绑定控件
+         * 绑定setting控件
          */
         bodyIp_et = (EditText) root.findViewById(R.id.bodyIp_et);
         bodyPort_et = (EditText) root.findViewById(R.id.bodyPort_et);
-
         sunIp_et = (EditText) root.findViewById(R.id.sunIp_et);
         sunPort_et = (EditText) root.findViewById(R.id.sunPort_et);
         tubeIp_et = (EditText) root.findViewById(R.id.tubeIp_et);
@@ -85,19 +77,21 @@ public class HomeFragment extends Fragment {
         curtainPort_et = (EditText) root.findViewById(R.id.curtainPort_et);
         fanIp_et = (EditText) root.findViewById(R.id.fanIp_et);
         fanPort_et = (EditText) root.findViewById(R.id.fanPort_et);
-
         time_et = (EditText) root.findViewById(R.id.time_et);
         maxLim_et = (EditText) root.findViewById(R.id.maxLim_et);
-        connect_tb = (ToggleButton) root.findViewById(R.id.connect_tb);
-        info_tv = (TextView) root.findViewById(R.id.info_tv);
-        sun_tv = (TextView) root.findViewById(R.id.sun_tv);
-        progressBar = (ProgressBar) root.findViewById(R.id.progressBar);
+        /**
+         * 绑定home的控件
+         */
+        connect_tb = (ToggleButton) mhomeroot.findViewById(R.id.connect_tb);
+        info_tv = (TextView) mhomeroot.findViewById(R.id.info_tv);
+        sun_tv = (TextView) mhomeroot.findViewById(R.id.sun_tv);
+        progressBar = (ProgressBar) mhomeroot.findViewById(R.id.progressBar);
         // 初始化数据
         initData();
         // 事件监听
         initEvent();
 
-        return root;
+        return mhomeroot;
     }
 
     /**
