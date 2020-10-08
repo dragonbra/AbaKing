@@ -73,6 +73,12 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 			sun_tv.setText(String.valueOf(Const.sun));
 		}
 
+		try {
+			Thread.sleep(Const.time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -100,6 +106,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 		fanSocket = getSocket(Const.FAN_IP, Const.FAN_PORT);
 		// 循环读取数据
 		while (CIRCLE) {
+			Const.count ++;
 			try {
 				// 如果全部连接成功
 				if (sunSocket != null && tubeSocket != null && buzzerSocket != null && curtainSocket != null && fanSocket != null && bodySocket != null) {
@@ -123,10 +130,12 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 
 					// 如果联动打开状态并且超过上限，蜂鸣器报警1s，打开窗帘
 					// 如果有人经过，打开风扇
-					Log.i(Const.TAG, "Const.linkage=" + Const.linkage);
-					Log.i(Const.TAG, "Const.sun=" + Const.sun);
-					Log.i(Const.TAG, "Const.maxLim=" + Const.maxLim);
-					Log.i(Const.TAG, "有人经过=" + body);
+					if (Const.count % 10 == 1) {
+						Log.i(Const.TAG, "Const.linkage=" + Const.linkage);
+						Log.i(Const.TAG, "Const.sun=" + Const.sun);
+						Log.i(Const.TAG, "Const.maxLim=" + Const.maxLim);
+						Log.i(Const.TAG, "有人经过=" + body);
+					}
 					if (Const.linkage && Const.sun > Const.maxLim) {
 						// 蜂鸣器
 						if (!Const.isBuzzerOn) {

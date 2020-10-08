@@ -3,6 +3,10 @@ public class Const {
 
 	public static String TAG="CASE";
 
+	public static Boolean isLinking = false;
+	public static ConnectTask connectTask;
+	public static int count = 0;
+
 	//光照度
 	public static String SUN_CHK= "01 03 00 2a 00 01 a5 c2";
 	public static int SUN_NUM=1;

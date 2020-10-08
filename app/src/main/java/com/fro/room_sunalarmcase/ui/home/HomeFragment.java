@@ -3,6 +3,7 @@ package com.fro.room_sunalarmcase.ui.home;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +51,6 @@ public class HomeFragment extends Fragment {
     private TextView info_tv;
     private ProgressBar progressBar;
 
-    private ConnectTask connectTask;
-
     private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,8 +68,10 @@ public class HomeFragment extends Fragment {
 
         context = getActivity().getBaseContext();
 
-        // 绑定控件
-        bindView();
+
+        /**
+         * 绑定控件
+         */
         bodyIp_et = (EditText) root.findViewById(R.id.bodyIp_et);
         bodyPort_et = (EditText) root.findViewById(R.id.bodyPort_et);
 
@@ -95,13 +96,8 @@ public class HomeFragment extends Fragment {
         initData();
         // 事件监听
         initEvent();
-        return root;
-    }
 
-    /**
-     * 绑定控件
-     */
-    private void bindView() {
+        return root;
     }
 
     /**
@@ -125,7 +121,15 @@ public class HomeFragment extends Fragment {
         time_et.setText(String.valueOf(Const.time));
         maxLim_et.setText(String.valueOf(Const.maxLim));
 
-        info_tv.setText("请点击连接!");
+        Log.i(Const.TAG, Const.isLinking.toString());
+        if (!Const.isLinking) {
+            connect_tb.setChecked(false);
+            info_tv.setText("请点击连接!");
+        } else {
+            connect_tb.setChecked(true);
+            info_tv.setTextColor(context.getResources().getColor(R.color.green));
+            info_tv.setText("连接正常！");
+        }
     }
 
     /**
@@ -138,7 +142,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    Const.isLinking = true;
                     // 获取IP和端口
                     String BODY_IP = bodyIp_et.getText().toString().trim();
                     String BODY_PORT = bodyPort_et.getText().toString().trim();
@@ -164,8 +168,7 @@ public class HomeFragment extends Fragment {
                         Const.CURTAIN_PORT = Integer.parseInt(CURTAIN_PORT);
                         Const.FAN_IP=FAN_IP;
                         Const.FAN_PORT=Integer.parseInt(FAN_PORT);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(context, "配置信息不正确,请重输！", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -177,27 +180,28 @@ public class HomeFragment extends Fragment {
                     progressBar.setVisibility(View.VISIBLE);
 
                     // 开启任务
-                    connectTask = new ConnectTask(context, sun_tv, info_tv, progressBar);
-                    connectTask.setCIRCLE(true);
-                    connectTask.execute();
+                    Const.connectTask = new ConnectTask(context, sun_tv, info_tv, progressBar);
+                    Const.connectTask.setCIRCLE(true);
+                    Const.connectTask.execute();
                 } else {
-
-                    // 取消任务
-                    if (connectTask != null && connectTask.getStatus() == AsyncTask.Status.RUNNING) {
-                        connectTask.setCIRCLE(false);
+                    if (Const.connectTask != null && Const.connectTask.getStatus() == AsyncTask.Status.RUNNING) {
+                        Const.connectTask.setCIRCLE(false);
                         try {
                             Thread.sleep(3000);
+                            Const.isLinking = false;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         // 如果Task还在运行，则先取消它
-                        connectTask.cancel(true);
-                        connectTask.closeSocket();
+                        Const.connectTask.cancel(true);
+                        Const.connectTask.closeSocket();
+                        Const.isLinking = false;
+
+                        // 进度条消失
+                        progressBar.setVisibility(View.GONE);
+                        info_tv.setText("请点击连接！");
+                        info_tv.setTextColor(context.getResources().getColor(R.color.gray));
                     }
-                    // 进度条消失
-                    progressBar.setVisibility(View.GONE);
-                    info_tv.setText("请点击连接！");
-                    info_tv.setTextColor(context.getResources().getColor(R.color.gray));
                 }
             }
         });
