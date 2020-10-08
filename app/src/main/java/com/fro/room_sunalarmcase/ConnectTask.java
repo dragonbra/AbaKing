@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.stream.Stream;
 
+import com.fro.util.DataInput;
 import com.fro.util.FRODigTube;
 import com.fro.util.FROSun;
 import com.fro.util.FROBody;
@@ -121,6 +122,17 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 
 					if (sun != null) {
 						Const.sun = (int) (float) sun;
+						if(DataInput.Xque.size() == 20) {
+							DataInput.Xque.poll();
+							DataInput.cnt++;
+							DataInput.Xque.offer(String.valueOf(DataInput.cnt*Const.time));
+							DataInput.Dataque.poll();
+							DataInput.Dataque.offer(String.valueOf(Const.sun));
+						}else {
+							DataInput.cnt++;
+							DataInput.Xque.offer(String.valueOf(DataInput.cnt*Const.time));
+							DataInput.Dataque.offer(String.valueOf(Const.sun));
+						}
 					}
 
 					// 数码管显示

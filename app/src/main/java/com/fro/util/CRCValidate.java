@@ -8,7 +8,7 @@ public class CRCValidate {
 	 * 第一个参数：要计算的buff 
 	 * 第一个参数：起始位置
 	 * 第三个参数：计算长度
-	 * 
+	 *
 	 * */
 	public static final int[] calculateCRC(byte[] data, int offset, int len) {
 
