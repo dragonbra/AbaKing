@@ -105,6 +105,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 		curtainSocket = getSocket(Const.CURTAIN_IP, Const.CURTAIN_PORT);
 		bodySocket = getSocket(Const.BODY_IP, Const.BODY_PORT);
 		fanSocket = getSocket(Const.FAN_IP, Const.FAN_PORT);
+		Const.isLinking = true;
 		// 循环读取数据
 		while (CIRCLE) {
 			Const.count ++;

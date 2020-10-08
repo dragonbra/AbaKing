@@ -142,7 +142,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Const.isLinking = true;
                     // 获取IP和端口
                     String BODY_IP = bodyIp_et.getText().toString().trim();
                     String BODY_PORT = bodyPort_et.getText().toString().trim();
@@ -195,7 +194,6 @@ public class HomeFragment extends Fragment {
                         // 如果Task还在运行，则先取消它
                         Const.connectTask.cancel(true);
                         Const.connectTask.closeSocket();
-                        Const.isLinking = false;
 
                         // 进度条消失
                         progressBar.setVisibility(View.GONE);
