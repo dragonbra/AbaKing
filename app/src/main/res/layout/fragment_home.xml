@@ -20,6 +20,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    
+    <com.fro.room_sunalarmcase.viewDrawer.MboardView
+        android:id="@+id/mboardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:bigSliceCount="10"
+        app:unitText="Lux"
+        app:maxValue="300"
+        app:scaleTextSize="20sp"
+        app:radius="110dp"
+        app:ribbonWidth="50dp"/>
 
 <!-- 光照值 -->
 <LinearLayout

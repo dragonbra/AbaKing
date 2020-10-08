@@ -146,4 +146,12 @@
 	<color name="darkblue">#00008b</color><!--暗蓝色 -->
 	<color name="navy">#000080</color><!--海军色 -->
 	<color name="black">#000000</color><!--黑色 -->
+
+	<color name="stripeColor">#607D8B</color>
+	<color name="pointCircleColor">#e4e9e9</color>
+
+	<color name="red_value">#c72424</color>
+	<color name="orange_value">#d38324</color>
+	<color name="yellow_value">#ddd843</color>
+	<color name="green_value">#58ce41</color>
 </resources>
