@@ -2,6 +2,8 @@ package com.fro.util;
 
 import android.util.Log;
 
+import com.fro.room_sunalarmcase.Const;
+
 /**
  * Created by Jorble on 2016/5/26.
  */
@@ -36,7 +38,8 @@ public class FRODigTube {
 
 			// 将字符串切成字符串数组
 			// "1234"->{"","1","2","3","4"}
-			String[] valueStrArr = valueStr.split("");
+			String[] valueStrArr = (" "+valueStr).split("");
+			// 这里数组索引从1开始，但是一开始没有加空格，bug修复于20/10/08
 
 			// 根据字符串数组长度得出数据命令
 			// {"1"}->"01 10 00 5e 00 02 04 10 10 10 11"

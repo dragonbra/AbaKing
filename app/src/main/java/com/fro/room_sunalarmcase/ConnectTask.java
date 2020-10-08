@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.stream.Stream;
 
 import com.fro.util.FRODigTube;
 import com.fro.util.FROSun;
@@ -23,6 +24,7 @@ import com.fro.util.StreamUtil;
 /**
  * Created by Jorble on 2016/3/4.
  */
+
 public class ConnectTask extends AsyncTask<Void, Void, Void> {
 
 	private Context context;
@@ -109,6 +111,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 					sun = FROSun.getData(Const.SUN_LEN, Const.SUN_NUM, read_buff);
 					read_buff = StreamUtil.readData(bodySocket.getInputStream());
 					body = FROBody.getData(Const.BODY_LEN, Const.BODY_NUM, read_buff);
+
 					if (sun != null) {
 						Const.sun = (int) (float) sun;
 					}
@@ -123,6 +126,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 					Log.i(Const.TAG, "Const.linkage=" + Const.linkage);
 					Log.i(Const.TAG, "Const.sun=" + Const.sun);
 					Log.i(Const.TAG, "Const.maxLim=" + Const.maxLim);
+					Log.i(Const.TAG, "有人经过=" + body);
 					if (Const.linkage && Const.sun > Const.maxLim) {
 						// 蜂鸣器
 						if (!Const.isBuzzerOn) {
@@ -137,27 +141,44 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 							Thread.sleep(200);
 						}
 
-					}
-
-					if (body) {
+					} else if (body) {
+						// 如果没光照报警时候感应到有人则报警
 						// 蜂鸣器
 						if (!Const.isBuzzerOn) {
 							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_ON);
-							Thread.sleep(1000);
-							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_OFF);
 							Thread.sleep(200);
+							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_OFF);
+							Thread.sleep(50);
+							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_ON);
+							Thread.sleep(200);
+							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_OFF);
+							Thread.sleep(50);
+							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_ON);
+							Thread.sleep(200);
+							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_OFF);
+							Thread.sleep(50);
 						}
-						// 风扇
+					}
+
+					if (body) {
+						// 如果有人来
+						// 风扇开始旋转
 						if (!Const.isFanOn) {
 							Const.isFanOn = true;
 							StreamUtil.writeCommand(fanSocket.getOutputStream(), Const.FAN_ON);
 							Thread.sleep(200);
 						}
 					} else {
+						// 如果风扇打开，则关闭
 						if (Const.isFanOn) {
 							Const.isFanOn = false;
 							StreamUtil.writeCommand(fanSocket.getOutputStream(), Const.FAN_OFF);
 							Thread.sleep(200);
+						}
+						// 如果蜂鸣器打开，则关闭
+						if (Const.isBuzzerOn) {
+							Const.isBuzzerOn = false;
+							StreamUtil.writeCommand(buzzerSocket.getOutputStream(), Const.BUZZER_OFF);
 						}
 					}
 				}
