@@ -18,4 +18,18 @@
         app:layout_constraintVertical_bias="0.0">
 
     </com.fro.util.ChartView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/awsl"
+        app:layout_constraintVertical_bias="0.954"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
 </androidx.constraintlayout.widget.ConstraintLayout>

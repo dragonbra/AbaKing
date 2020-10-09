@@ -13,6 +13,8 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.fro.room_sunalarmcase.Const;
 import com.fro.room_sunalarmcase.R;
@@ -21,14 +23,14 @@ import com.fro.util.Constant;
 import com.fro.util.DataInput;
 
 import org.xmlpull.v1.XmlPullParser;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
-
+    private FloatingActionButton button;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Constant.point = new Point();
@@ -41,6 +43,7 @@ public class GalleryFragment extends Fragment {
         galleryViewModel =
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        button = root.findViewById(R.id.fabs);
         ChartView tmp = root.findViewById(R.id.awsl);
         String[] Xlabel = new String[20];
         String[] data = new String[20];
@@ -70,4 +73,15 @@ public class GalleryFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_nav_gallery_self);
+            }
+        });
+    }
 }
