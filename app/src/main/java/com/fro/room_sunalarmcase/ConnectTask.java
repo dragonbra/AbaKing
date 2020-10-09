@@ -188,7 +188,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 						}
 					}
 
-					if (body) {
+					if (Const.linkage && Const.body != null && Const.body) {
 						// 如果有人来
 						// 风扇开始旋转
 						if (!Const.isFanOn) {
