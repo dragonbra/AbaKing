@@ -373,7 +373,7 @@ public class MboardView extends View {
             point[1] = (float) (mCenterY - Math.sin(arcAngle) * radius);
         }
 
-        Log.e("getCoordinatePoint","radius="+radius+",cirAngle="+cirAngle+",point[0]="+point[0]+",point[1]="+point[1]);
+        //Log.e("getCoordinatePoint","radius="+radius+",cirAngle="+cirAngle+",point[0]="+point[0]+",point[1]="+point[1]);
         return point;
     }
 

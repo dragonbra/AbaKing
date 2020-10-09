@@ -50,15 +50,11 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
         View mhomeroot = inflater.inflate(R.layout.fragment_home,container,false);
         context = getActivity().getBaseContext();
 
         button = mhomeroot.findViewById(R.id.fab);
 
-        /**
-         * 绑定setting控件
-         */
         dashboardview = (MboardView) mhomeroot.findViewById(R.id.mboardView);
         /**
          * 绑定home的控件
@@ -67,8 +63,6 @@ public class HomeFragment extends Fragment {
         info_tv = (TextView) mhomeroot.findViewById(R.id.info_tv);
         sun_tv = (TextView) mhomeroot.findViewById(R.id.sun_tv);
         progressBar = (ProgressBar) mhomeroot.findViewById(R.id.progressBar);
-//        // 初始化数据
-//        initData();
         // 事件监听
         initEvent();
 
