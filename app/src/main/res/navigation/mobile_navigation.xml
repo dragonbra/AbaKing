@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="com.fro.room_sunalarmcase.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_self"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -25,5 +29,9 @@
         android:id="@+id/nav_slideshow"
         android:name="com.fro.room_sunalarmcase.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_slideshow" >
+        <action
+            android:id="@+id/action_nav_slideshow_self"
+            app:destination="@id/nav_slideshow" />
+    </fragment>
 </navigation>

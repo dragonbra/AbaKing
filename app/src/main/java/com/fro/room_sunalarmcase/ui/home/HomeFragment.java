@@ -27,7 +27,11 @@ import com.fro.room_sunalarmcase.R;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.fro.room_sunalarmcase.viewDrawer.MboardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeFragment extends Fragment {
     private Context context;
@@ -55,6 +59,8 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private MboardView dashboardview;
 
+    private FloatingActionButton button;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -63,6 +69,7 @@ public class HomeFragment extends Fragment {
         View mhomeroot = inflater.inflate(R.layout.fragment_home,container,false);
         context = getActivity().getBaseContext();
 
+        button = mhomeroot.findViewById(R.id.fab);
 
         /**
          * 绑定setting控件
@@ -235,4 +242,17 @@ public class HomeFragment extends Fragment {
 
         return (isIpAddress && isPort);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_nav_home_self);
+            }
+        });
+    }
+
 }

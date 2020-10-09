@@ -29,9 +29,9 @@
         app:bigSliceCount="10"
         app:unitText="Lux"
         app:maxValue="1000"
-        app:scaleTextSize="20sp"
-        app:radius="110dp"
-        app:ribbonWidth="50dp"/>
+        app:scaleTextSize="15sp"
+        app:radius="200dp"
+        app:ribbonWidth="60dp"/>
 
 <!-- 光照值 -->
 <LinearLayout
@@ -101,7 +101,16 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
+
     </LinearLayout>
+
 </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
 </LinearLayout>

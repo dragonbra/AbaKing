@@ -86,7 +86,7 @@ public class MboardView extends View {
         mScaleColor = a.getColor(R.styleable.MboardView_scaleColor, Color.WHITE);
         mScaleTextSize = a.getDimensionPixelSize(R.styleable.MboardView_scaleTextSize, spToPx(12));
         mUnitText = a.getString(R.styleable.MboardView_unitText);
-        mUnitTextSize = a.getDimensionPixelSize(R.styleable.MboardView_unitTextSize, spToPx(14));
+        mUnitTextSize = a.getDimensionPixelSize(R.styleable.MboardView_unitTextSize, spToPx(40));
         mMinValue = a.getInteger(R.styleable.MboardView_minValue, 0);
         mMaxValue = a.getInteger(R.styleable.MboardView_maxValue, 150);
         mRibbonWidth = a.getDimensionPixelSize(R.styleable.MboardView_ribbonWidth, 0);
