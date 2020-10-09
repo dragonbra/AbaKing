@@ -72,7 +72,7 @@ public class ChartView extends View {
         canvas.drawLine(XPoint + YLength,YPoint,XPoint + YLength -12,YPoint + 6,paint);
         //设置字体的大小角度等
         paint.setTextSize(30);
-        drawText(canvas,"单位:kWh", XPoint + YLength - 20, YPoint - 10, paint,0);
+        drawText(canvas,"单位:Lux", XPoint + YLength - 20, YPoint - 10, paint,0);
 
         //设置X轴
         paint.setTextSize(25);

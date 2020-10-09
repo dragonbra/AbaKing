@@ -129,7 +129,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 					if (sun != null) {
 						Const.sun = (int) (float) sun;
 						Const.body = (Boolean) body;
-						if(DataInput.Xque.size() == 20) {
+						if(DataInput.Xque.size() == 8) {
 							DataInput.Xque.poll();
 							DataInput.cnt++;
 							DataInput.Xque.offer(String.valueOf(DataInput.cnt*Const.time));

@@ -49,8 +49,8 @@ public class GalleryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         button = root.findViewById(R.id.fabs);
         ChartView tmp = root.findViewById(R.id.awsl);
-        String[] Xlabel = new String[20];
-        String[] data = new String[20];
+        String[] Xlabel = new String[8];
+        String[] data = new String[8];
         if(DataInput.Dataque.size() == 0) {
             DataInput.Dataque.offer("1");
             DataInput.Xque.offer("1");
