@@ -1,7 +1,11 @@
 package com.fro.room_sunalarmcase;
+
+import com.fro.room_sunalarmcase.viewDrawer.MboardView;
+
 public class Const {
 
 	public static String TAG="CASE";
+	public static MboardView dashboardview;
 
 	public static Boolean isLinking = false;
 	public static ConnectTask connectTask;

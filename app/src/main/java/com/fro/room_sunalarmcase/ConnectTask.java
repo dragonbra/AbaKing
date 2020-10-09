@@ -21,6 +21,7 @@ import com.fro.util.FRODigTube;
 import com.fro.util.FROSun;
 import com.fro.util.FROBody;
 import com.fro.util.StreamUtil;
+import com.fro.room_sunalarmcase.viewDrawer.MboardView;
 
 /**
  * Created by Jorble on 2016/3/4.
@@ -31,6 +32,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 	private Context context;
 	TextView sun_tv;
 	TextView info_tv;
+	MboardView dashboardview;
 	ProgressBar progressBar;
 
 	private Float sun;
@@ -46,11 +48,12 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 
 	private boolean CIRCLE = false;
 
-	public ConnectTask(Context context, TextView sun_tv, TextView info_tv, ProgressBar progressBar) {
+	public ConnectTask(Context context, TextView sun_tv, TextView info_tv, ProgressBar progressBar,MboardView dashboardview) {
 		this.context = context;
 		this.sun_tv = sun_tv;
 		this.info_tv = info_tv;
 		this.progressBar = progressBar;
+		this.dashboardview = dashboardview;
 	}
 
 	/**
@@ -72,6 +75,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 		// 显示数据
 		if (Const.sun != null) {
 			sun_tv.setText(String.valueOf(Const.sun));
+			dashboardview.setRealTimeValue(Float.valueOf(Const.sun));
 		}
 
 		try {

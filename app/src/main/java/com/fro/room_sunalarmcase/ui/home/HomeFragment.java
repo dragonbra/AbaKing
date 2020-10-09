@@ -27,6 +27,7 @@ import com.fro.room_sunalarmcase.R;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import androidx.appcompat.app.AppCompatActivity;
+import com.fro.room_sunalarmcase.viewDrawer.MboardView;
 
 public class HomeFragment extends Fragment {
     private Context context;
@@ -52,6 +53,7 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
 
     private HomeViewModel homeViewModel;
+    private MboardView dashboardview;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class HomeFragment extends Fragment {
         /**
          * 绑定setting控件
          */
+        dashboardview = (MboardView) mhomeroot.findViewById(R.id.mboardView);
         bodyIp_et = (EditText) root.findViewById(R.id.bodyIp_et);
         bodyPort_et = (EditText) root.findViewById(R.id.bodyPort_et);
         sunIp_et = (EditText) root.findViewById(R.id.sunIp_et);
@@ -173,7 +176,7 @@ public class HomeFragment extends Fragment {
                     progressBar.setVisibility(View.VISIBLE);
 
                     // 开启任务
-                    Const.connectTask = new ConnectTask(context, sun_tv, info_tv, progressBar);
+                    Const.connectTask = new ConnectTask(context, sun_tv, info_tv, progressBar,dashboardview);
                     Const.connectTask.setCIRCLE(true);
                     Const.connectTask.execute();
                 } else {
