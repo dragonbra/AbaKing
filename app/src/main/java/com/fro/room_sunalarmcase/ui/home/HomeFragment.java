@@ -50,11 +50,15 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
         View mhomeroot = inflater.inflate(R.layout.fragment_home,container,false);
         context = getActivity().getBaseContext();
 
         button = mhomeroot.findViewById(R.id.fab);
 
+        /**
+         * 绑定setting控件
+         */
         dashboardview = (MboardView) mhomeroot.findViewById(R.id.mboardView);
         /**
          * 绑定home的控件
@@ -63,10 +67,24 @@ public class HomeFragment extends Fragment {
         info_tv = (TextView) mhomeroot.findViewById(R.id.info_tv);
         sun_tv = (TextView) mhomeroot.findViewById(R.id.sun_tv);
         progressBar = (ProgressBar) mhomeroot.findViewById(R.id.progressBar);
+        // 初始化连接状态
+        initStatus();
         // 事件监听
         initEvent();
 
         return mhomeroot;
+    }
+
+    private void initStatus() {
+        Log.i(Const.TAG, Const.isLinking.toString());
+        if (!Const.isLinking) {
+            connect_tb.setChecked(false);
+            info_tv.setText("请点击连接!");
+        } else {
+            connect_tb.setChecked(true);
+            info_tv.setTextColor(context.getResources().getColor(R.color.green));
+            info_tv.setText("连接正常！");
+        }
     }
 
     /**
