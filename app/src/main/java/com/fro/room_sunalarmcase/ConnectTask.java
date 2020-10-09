@@ -118,8 +118,9 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 				if (sunSocket != null && tubeSocket != null && buzzerSocket != null && curtainSocket != null && fanSocket != null && bodySocket != null) {
 					// 查询光照度
 					StreamUtil.writeCommand(sunSocket.getOutputStream(), Const.SUN_CHK);
+					Thread.sleep(Const.time / 3);
 					StreamUtil.writeCommand(bodySocket.getOutputStream(), Const.BODY_CHK);
-					Thread.sleep(Const.time / 2);
+					Thread.sleep(Const.time / 3);
 					read_buff = StreamUtil.readData(sunSocket.getInputStream());
 					sun = FROSun.getData(Const.SUN_LEN, Const.SUN_NUM, read_buff);
 					read_buff = StreamUtil.readData(bodySocket.getInputStream());
@@ -127,6 +128,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 
 					if (sun != null) {
 						Const.sun = (int) (float) sun;
+						Const.body = (Boolean) body;
 						if(DataInput.Xque.size() == 20) {
 							DataInput.Xque.poll();
 							DataInput.cnt++;
@@ -143,11 +145,11 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 					// 数码管显示
 					Const.TUBE_CMD = FRODigTube.intToCmdString(Const.sun);
 					StreamUtil.writeCommand(tubeSocket.getOutputStream(), Const.TUBE_CMD);
-					Thread.sleep(Const.time / 2);
+					Thread.sleep(Const.time / 3);
 
 					// 如果联动打开状态并且超过上限，蜂鸣器报警1s，打开窗帘
 					// 如果有人经过，打开风扇
-					if (Const.count % 10 == 1) {
+					if (Const.count % 5 == 0) {
 						Log.i(Const.TAG, "Const.linkage=" + Const.linkage);
 						Log.i(Const.TAG, "Const.sun=" + Const.sun);
 						Log.i(Const.TAG, "Const.maxLim=" + Const.maxLim);
@@ -167,7 +169,7 @@ public class ConnectTask extends AsyncTask<Void, Void, Void> {
 							Thread.sleep(200);
 						}
 
-					} else if (body) {
+					} else if (Const.linkage && Const.body != null && Const.body) {
 						// 如果没光照报警时候感应到有人则报警
 						// 蜂鸣器
 						if (!Const.isBuzzerOn) {

@@ -34,7 +34,7 @@ public class Const {
 	public static String BODY_CHK= "01 03 00 3c 00 01 44 06";
 	public static int BODY_NUM=1;
 	public static int BODY_LEN=7;
-	public static Boolean BODY=null;
+	public static Boolean body=null;
 
 	//风扇
 	public static String FAN_ON= "01 10 00 48 00 01 02 00 01 68 18";
