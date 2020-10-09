@@ -31,5 +31,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/awsl"
         app:layout_constraintVertical_bias="0.954"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_refresh_black_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -117,6 +117,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_nav_home_self);
+                Toast.makeText(context, "刷新成功！", Toast.LENGTH_SHORT).show();
             }
         });
     }

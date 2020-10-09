@@ -102,6 +102,7 @@ public class SlideshowFragment extends Fragment {
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_nav_slideshow_self);
+                Toast.makeText(context, "刷新成功！", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -133,7 +134,7 @@ public class SlideshowFragment extends Fragment {
      */
     private void initEvent() {
 
-        // 连接
+        // 保存
         submit_b.setOnClickListener( new Button.OnClickListener() {
              @Override
              public void onClick(View v) {

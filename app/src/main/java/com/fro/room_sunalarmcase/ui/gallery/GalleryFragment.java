@@ -1,11 +1,13 @@
 package com.fro.room_sunalarmcase.ui.gallery;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,9 +33,11 @@ public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
     private FloatingActionButton button;
+    private Context context;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Constant.point = new Point();
+        context = getActivity().getBaseContext();
         //获取屏幕长宽
         //getActivity().getWindowManager().getDefaultDisplay().getSize(Constant.point);
         Constant.point = new Point(1080,2028);
@@ -74,6 +78,7 @@ public class GalleryFragment extends Fragment {
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_nav_gallery_self);
+                Toast.makeText(context, "刷新成功！", Toast.LENGTH_SHORT).show();
             }
         });
     }
