@@ -62,13 +62,6 @@ public class GalleryFragment extends Fragment {
         tmp.SetInfo(Xlabel,new String[] {"","200","400","600","800","1000"},data,// 数据
                 "图标的标题",sz);
 
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
 
         return root;
     }
