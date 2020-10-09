@@ -67,12 +67,24 @@ public class HomeFragment extends Fragment {
         info_tv = (TextView) mhomeroot.findViewById(R.id.info_tv);
         sun_tv = (TextView) mhomeroot.findViewById(R.id.sun_tv);
         progressBar = (ProgressBar) mhomeroot.findViewById(R.id.progressBar);
-//        // 初始化数据
-//        initData();
+        // 初始化连接状态
+        initStatus();
         // 事件监听
         initEvent();
 
         return mhomeroot;
+    }
+
+    private void initStatus() {
+        Log.i(Const.TAG, Const.isLinking.toString());
+        if (!Const.isLinking) {
+            connect_tb.setChecked(false);
+            info_tv.setText("请点击连接!");
+        } else {
+            connect_tb.setChecked(true);
+            info_tv.setTextColor(context.getResources().getColor(R.color.green));
+            info_tv.setText("连接正常！");
+        }
     }
 
     /**
