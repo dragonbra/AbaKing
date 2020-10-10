@@ -55,14 +55,10 @@ public class HomeFragment extends Fragment {
         context = getActivity().getBaseContext();
 
         button = mhomeroot.findViewById(R.id.fab);
-
-        /**
-         * 绑定setting控件
-         */
-        dashboardview = (MboardView) mhomeroot.findViewById(R.id.mboardView);
         /**
          * 绑定home的控件
          */
+        dashboardview = (MboardView) mhomeroot.findViewById(R.id.mboardView);
         connect_tb = (ToggleButton) mhomeroot.findViewById(R.id.connect_tb);
         info_tv = (TextView) mhomeroot.findViewById(R.id.info_tv);
         sun_tv = (TextView) mhomeroot.findViewById(R.id.sun_tv);
